@@ -1,0 +1,3 @@
+User: piri
+pass: GivnhJyI4aVNXPhZ
+Mongodb URI: mongodb+srv://piri:GivnhJyI4aVNXPhZ@cluster0.zhkzl.mongodb.net/cafe
