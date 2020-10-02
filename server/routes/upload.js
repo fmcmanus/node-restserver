@@ -19,7 +19,8 @@ app.put('/upload/:tipo/:id', function(req, res) {
         return res.status(400)
             .json({
                 ok: false,
-                err: { message: 'No se ha seleccionado ningun archivo' }
+                err: { message: 'No se ha seleccionado ningun archivo' },
+                donde: 1
             });
     }
 
@@ -31,7 +32,8 @@ app.put('/upload/:tipo/:id', function(req, res) {
                 ok: false,
                 err: {
                     message: 'Los tipos permitidos son ' + tiposValidos.join(', '),
-                    tipo
+                    tipo,
+                    donde: 2
                 }
             });
     }
@@ -48,7 +50,8 @@ app.put('/upload/:tipo/:id', function(req, res) {
                 ok: false,
                 err: {
                     message: 'Las extensiones permitidas son ' + extensionesValidas.join(', '),
-                    ext: extension
+                    ext: extension,
+                    donde: 3
                 }
             });
     }
@@ -60,7 +63,8 @@ app.put('/upload/:tipo/:id', function(req, res) {
             return res.status(500)
                 .json({
                     ok: false,
-                    err
+                    err,
+                    donde: 4
                 });
 
         // Aqui imagen cargada
@@ -82,7 +86,8 @@ function imagenUsuario(id, res, nombreArchivo) {
             return res.status(400)
                 .json({
                     ok: false,
-                    err: { message: 'El usuario no existe' }
+                    err: { message: 'El usuario no existe' },
+                    donde: 5
                 });
         }
 
@@ -91,7 +96,8 @@ function imagenUsuario(id, res, nombreArchivo) {
             return res.status(500)
                 .json({
                     ok: false,
-                    err
+                    err,
+                    donde: 6
                 });
         }
 
@@ -103,7 +109,8 @@ function imagenUsuario(id, res, nombreArchivo) {
                 return res.status(500)
                     .json({
                         ok: false,
-                        err
+                        err,
+                        donde: 7
                     });
             }
             res.json({
@@ -127,7 +134,8 @@ function imagenProducto(id, res, nombreArchivo) {
             return res.status(400)
                 .json({
                     ok: false,
-                    err: { message: 'El producto no existe' }
+                    err: { message: 'El producto no existe' },
+                    donde: 8
                 });
         }
 
@@ -136,7 +144,8 @@ function imagenProducto(id, res, nombreArchivo) {
             return res.status(500)
                 .json({
                     ok: false,
-                    err
+                    err,
+                    donde: 9
                 });
         }
 
@@ -148,7 +157,8 @@ function imagenProducto(id, res, nombreArchivo) {
                 return res.status(500)
                     .json({
                         ok: false,
-                        err
+                        err,
+                        donde: 10
                     });
             }
             res.json({
@@ -167,7 +177,6 @@ function imagenProducto(id, res, nombreArchivo) {
 
 function borraArchivo(nombreImagen, tipo) {
     let pathImagen = path.resolve(__dirname, `../../uploads/${tipo}/${ nombreImagen }`);
-    console.log(pathImagen);
     if (fs.existsSync(pathImagen)) {
         fs.unlinkSync(pathImagen);
     }
